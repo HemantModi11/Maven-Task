@@ -2,33 +2,38 @@ pipeline {
     agent any
 
     tools {
-        maven 'sonarmaven'  // Ensure 'sonarmaven' tool is configured in Jenkins
+        maven 'sonarmaven' // Ensure this matches the Maven tool configuration in Jenkins
     }
 
     environment {
-        SONAR_TOKEN = credentials('mavenTask')  // SonarQube token from Jenkins credentials
-        JAVA_HOME = 'C:/Program Files/Java/jdk-17'
-        PATH = "${JAVA_HOME}/bin;${env.PATH}"
+        SONAR_TOKEN = credentials('Sonarqube-token') // Use the correct credentials ID for SonarQube token
+        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17' // Set the Java home path
+        PATH = "${JAVA_HOME}\\bin;${env.PATH}" // Add Java to PATH
     }
 
     stages {
         stage('Checkout') {
             steps {
-                checkout scm  // Check out the code from the repository
+                checkout scm // Check out the code from the repository
             }
         }
 
         stage('Build') {
             steps {
-                bat 'mvn clean package'  // Run Maven build
+                bat 'mvn clean package' // Run Maven to clean and package the project
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonarqube') {  // Use SonarQube environment configured in Jenkins
+                withSonarQubeEnv('sonarqube') { // Ensure this matches the SonarQube configuration in Jenkins
                     bat """
-                        mvn sonar:sonar -Dsonar.projectKey=Hemant-Maven -Dsonar.sources=src/main/java -Dsonar.tests=src/test/java -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_TOKEN%
+                        mvn sonar:sonar ^
+                        -Dsonar.projectKey=maven-pro ^
+                        -Dsonar.sources=src/main/java ^
+                        -Dsonar.tests=src/test/java ^
+                        -Dsonar.host.url=http://localhost:9000 ^
+                        -Dsonar.login=%SONAR_TOKEN%
                     """
                 }
             }
@@ -37,10 +42,10 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline completed successfully.'
+            echo 'Pipeline completed successfully.' // Message on success
         }
         failure {
-            echo 'Pipeline failed.'
+            echo 'Pipeline failed.' // Message on failure
         }
     }
 }
