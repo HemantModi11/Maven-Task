@@ -25,7 +25,7 @@ pipeline {
                     bat """
                         mvn sonar:sonar ^
                         -Dsonar.projectKey=Hemant-Maven ^
-                        -Dsonar.sources=src/main/java/com/example/automation ^
+                        -Dsonar.sources=src/test/java/MavenProject ^
                         -Dsonar.host.url=http://localhost:9000 ^
                         -Dsonar.login=%SONAR_TOKEN%
                     """
