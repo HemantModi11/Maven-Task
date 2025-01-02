@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        SONAR_TOKEN = credentials('Sonarqube-token') // Use the correct credentials ID for SonarQube token
+        SONAR_TOKEN = credentials('mavenTask') // Use the correct credentials ID for SonarQube token
         JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17' // Set the Java home path
         PATH = "${JAVA_HOME}\\bin;${env.PATH}" // Add Java to PATH
     }
@@ -29,7 +29,7 @@ pipeline {
                 withSonarQubeEnv('sonarqube') { // Ensure this matches the SonarQube configuration in Jenkins
                     bat """
                         mvn sonar:sonar ^
-                        -Dsonar.projectKey=maven-pro ^
+                        -Dsonar.projectKey=Hemant-Maven ^
                         -Dsonar.sources=src/main/java ^
                         -Dsonar.tests=src/test/java ^
                         -Dsonar.host.url=http://localhost:9000 ^
