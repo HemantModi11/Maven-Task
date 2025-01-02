@@ -28,12 +28,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonarqube') {  // Use SonarQube environment configured in Jenkins
                     bat """
-                        mvn sonar:sonar ^
-                        -Dsonar.projectKey=Hemant-Maven ^
-                        -Dsonar.sources=src/main/java ^  // Sources should typically be from src/main/java
-                        -Dsonar.tests=src/test/java ^  // Test sources should be from src/test/java
-                        -Dsonar.host.url=http://localhost:9000 ^
-                        -Dsonar.login=%SONAR_TOKEN%
+                        mvn sonar:sonar -Dsonar.projectKey=Hemant-Maven -Dsonar.sources=src/main/java -Dsonar.tests=src/test/java -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_TOKEN%
                     """
                 }
             }
