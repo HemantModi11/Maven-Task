@@ -24,6 +24,13 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                echo 'Running tests and collecting code coverage...'
+                sh 'mvn test jacoco:report'
+            }
+        }
+
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonarqube') { // Ensure this matches the SonarQube configuration in Jenkins
