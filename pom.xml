@@ -42,13 +42,13 @@
         <!-- JUnit Jupiter Dependencies for Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
+            <artifactId>junit-jupiter-api</artifactId>
             <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
+            <artifactId>junit-jupiter-engine</artifactId>
             <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
@@ -85,10 +85,18 @@
                     </configuration>
                 </plugin>
 
-                <!-- Surefire Plugin (for running tests) -->
+                <!-- Surefire Plugin for JUnit 5 Tests -->
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.0.0-M5</version>
+                    <configuration>
+                        <includes>
+                            <include>**/*Test.java</include>
+                        </includes>
+                        <dependenciesToScan>
+                            <dependency>org.junit.jupiter</dependency>
+                        </dependenciesToScan>
+                    </configuration>
                 </plugin>
 
                 <!-- Jar Plugin -->
