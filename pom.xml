@@ -32,30 +32,25 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- Selenium WebDriver Dependency -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.12.0</version>
         </dependency>
-
-        <!-- JUnit Jupiter Dependencies for Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
+            <artifactId>junit-jupiter</artifactId>
             <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.11.0</version>
+            <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -63,19 +58,14 @@
     <build>
         <pluginManagement>
             <plugins>
-                <!-- Clean Plugin -->
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.4.0</version>
                 </plugin>
-
-                <!-- Resources Plugin -->
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>3.3.1</version>
                 </plugin>
-
-                <!-- Compiler Plugin -->
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.13.0</version>
@@ -84,53 +74,32 @@
                         <target>${maven.compiler.target}</target>
                     </configuration>
                 </plugin>
-
-                <!-- Surefire Plugin for JUnit 5 Tests -->
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M5</version>
-                    <configuration>
-                        <includes>
-                            <include>**/*Test.java</include>
-                        </includes>
-                        <dependenciesToScan>
-                            <dependency>org.junit.jupiter</dependency>
-                        </dependenciesToScan>
-                    </configuration>
+                    <version>3.3.0</version>
                 </plugin>
-
-                <!-- Jar Plugin -->
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.4.2</version>
                 </plugin>
-
-                <!-- Install Plugin -->
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
                     <version>3.1.2</version>
                 </plugin>
-
-                <!-- Deploy Plugin -->
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>3.1.2</version>
                 </plugin>
-
-                <!-- Site Plugin -->
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.12.1</version>
                 </plugin>
-
-                <!-- Project Info Reports Plugin -->
                 <plugin>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>3.6.1</version>
                 </plugin>
             </plugins>
         </pluginManagement>
-
         <plugins>
             <!-- SonarQube Plugin -->
             <plugin>
@@ -138,8 +107,8 @@
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.9.1.2184</version>
             </plugin>
-
-            <!-- JaCoCo Plugin (for code coverage) -->
+            
+            <!-- JaCoCo Plugin -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -159,8 +128,8 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!-- PMD Plugin (for static code analysis) -->
+            
+            <!-- PMD Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
@@ -184,7 +153,6 @@
     </build>
 
     <profiles>
-        <!-- Sonar Profile -->
         <profile>
             <id>sonar</id>
             <activation>
@@ -211,5 +179,4 @@
             </build>
         </profile>
     </profiles>
-
 </project>
