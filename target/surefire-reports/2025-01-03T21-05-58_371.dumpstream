@@ -1,0 +1,4 @@
+# Created at 2025-01-03T21:05:59.000
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Worldline Task\Sonarqube\Assignment 2\Project\Maven\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+
