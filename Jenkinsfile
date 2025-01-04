@@ -36,22 +36,20 @@ pipeline {
         }
 
         stage('SonarAnalysis') {
-            environment {
-                SONAR_TOKEN = credentials('mavenTask') // Accessing the SonarQube token stored in Jenkins credentials
-            }
             steps {
-                bat '''
-                mvn clean verify sonar:sonar \
-               -Dsonar.projectKey=Hemant-Maven \
-               -Dsonar.projectName='Hemant Maven' \
-               -Dsonar.host.url=http://localhost:9000 \
-               -Dsonar.sources=src/main/java \
-               -Dsonar.test.inclusions=src/test/java/**/*.java \
-               -Dsonar.exclusions=src/main/java/**/*Test.java,**/test/**/* \
-               -Dsonar.java.binaries=target/classes \
-               -Dsonar.jacoco.reportPaths=target/site/jacoco/jacoco.xml \
-               -Dsonar.token=%SONAR_TOKEN%
-                '''
+                withSonarQubeEnv('sonarqube') {
+                    bat """
+                        mvn sonar:sonar \
+                        -Dsonar.projectKey=Hemant-Maven \
+                        -Dsonar.sources=src/main/java/com/example/automation \
+                        -Dsonar.tests=src/test/java/com/example/automation \
+                        -Dsonar.junit.reportPaths=target/surefire-reports \
+                        -Dsonar.jacoco.reportPaths=target/site/jacoco/jacoco.xml \
+                        -Dsonar.pmd.reportPaths=target/pmd-duplicates.xml \
+                        -Dsonar.host.url=http://localhost:9000 \
+                        -Dsonar.login=%SONAR_TOKEN%
+                    """
+                }
             }
         }
     }
